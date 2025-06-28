@@ -46,7 +46,7 @@ You’ll learn to:
 
 ---
 
-## 🧱 Step 1: Setting up **Ubuntu Desktop** in VirtualBox
+## Step 1: Setting up Ubuntu Desktop in VirtualBox
 
 We start by creating the core system that hosts the Wazuh manager — an **Ubuntu Desktop** VM inside VirtualBox.
 
@@ -126,7 +126,7 @@ sudo reboot
 
 ---
 
-## 🔐 Step 2: Installing Wazuh All-in-One
+## Step 2: Installing Wazuh All-in-One
 
 Once your Ubuntu Desktop is ready and Guest Additions are installed, it’s time to set up Wazuh — the heart of your SIEM.
 
@@ -179,13 +179,13 @@ Check the output at the end of the installer — it shows the login URL, user, a
 
 Open Firefox or your browser (inside VM or host system):
 
-Type: 'https://<your-ip>:443'
+Type: 'https://your-ip:443'
 
 ![image](https://github.com/user-attachments/assets/7fb6e0e2-cf0f-4603-b870-920f1473fe46)
 
 ---
 
-## 🌐 Step 3: Configuring Networking - Bridged + Host-Only
+## Step 3: Configuring Networking - Bridged + Host-Only
 
 To build a lab network that's both **isolated** and has **internet access**, we’ll use two network adapters:
 
@@ -240,7 +240,7 @@ With Host-Only:
 
 ---
 
-## 🟩 Step 4: Assigning a Static IP to Ubuntu (Host-Only Adapter)
+## Step 4: Assigning a Static IP to Ubuntu (Host-Only Adapter)
 
 To keep your lab reliable, assign a static IP to the Host-Only adapter (`enp0s8`) on your Ubuntu server.
 
@@ -279,8 +279,6 @@ To keep your lab reliable, assign a static IP to the Host-Only adapter (`enp0s8`
     ```
     You should see `192.168.56.10` assigned to `enp0s8`.
 
-> Add screen of `ip a` output showing the static IP on enp0s8
-
 ---
 
 Now your Ubuntu server will always have the same IP on the lab network, making DNS and agent connections rock-solid.
@@ -289,7 +287,7 @@ Now your Ubuntu server will always have the same IP on the lab network, making D
 
 ---
 
-## 🟦 Step 5: Configuring Private DNS with dnsmasq
+## Step 5: Setting up DNS with dnsmasq
 
 Now that your Ubuntu server has a static IP (e.g., `192.168.56.10`), you can set up a private DNS so all your lab machines can use a friendly domain name like `wazuh.lab` instead of typing the IP.
 
@@ -343,7 +341,7 @@ Now you can use `wazuh.lab` instead of the IP address everywhere in your lab!
 
 ---
 
-## 🟨 Step 6: Agent Setup (Windows 11 & Windows Server 2022)
+## Step 6: Agent Setup (Windows 11 & Server 2022)
 
 Now let’s connect your Windows machines to the Wazuh manager so you can monitor and detect activity across your lab.
 
@@ -413,7 +411,7 @@ Now let’s connect your Windows machines to the Wazuh manager so you can monito
 Now your Windows endpoints are fully monitored by your portable SIEM lab!
 ---
 
-## 🟩 Step 7: Confirming Everything Works
+## Step 7: Confirming Everything Works
 
 Now let’s make sure your portable SIEM lab is fully functional and ready for real-world use.
 
@@ -468,9 +466,12 @@ To verify File Integrity Monitoring (FIM) is working, create a test file in a di
 
 **Recommended for this lab:**
 
+> Note: The default Wazuh agent config for Windows only monitors specific system folders and files. The Startup folder (`C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup`) is monitored in real time, so it’s the best place for a test file in most labs.
+
 ```cmd
 echo wazuh-test > "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\wazuh_test.txt"
 ```
+> If you get a permissions error, run Command Prompt as Administrator.
 
 - Wait 1–2 minutes, then refresh the Wazuh Dashboard.
 - Go to **Agents** → select your Windows agent → check the **FIM: Recent events** panel.
@@ -488,7 +489,7 @@ If all these checks pass, your portable SIEM lab is fully operational!
 
 ---
 
-## 🛠️ Troubleshooting Tips
+## Troubleshooting Tips
 
 - **Agent not showing as active?**
   - Double-check the DNS settings on the agent.
@@ -513,12 +514,10 @@ If all these checks pass, your portable SIEM lab is fully operational!
 
 ---
 
-## 🎉 Conclusion
+## Conclusion
 
 You’ve now built a **portable, real-world SIEM lab** using Wazuh, Ubuntu, and Windows endpoints—all fully virtualized and resilient to network changes.  
 This setup is perfect for learning, testing, and demonstrating cybersecurity skills anywhere.
-
-> Add a final screenshot of your full lab dashboard or architecture diagram
 
 ---
 
